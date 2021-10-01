@@ -1,20 +1,16 @@
 package SupportFiles;
 
-enum TicketStatus {
-    BOUGHT, IN_PROCESS, UTILIZED
-}
-
 interface ITicket {
     Location getFromLocation();
-
+    
     Location getToLocation();
-
+    
     int getTicketID();
-
+    
     double getTicketPrice();
-
+    
     boolean setToLocation(Location newLocation);
-
+    
     boolean setFromLocation(Location newLocation);
 }
 
@@ -24,7 +20,7 @@ public class Ticket implements ITicket {
     private int ID;
     private double price;
     private TicketStatus status;
-
+    
     public Ticket(int ID, Location fromLocation, Location toLocation, double price) {
         this.ID = ID;
         this.fromLocation = fromLocation;
@@ -48,18 +44,18 @@ public class Ticket implements ITicket {
         if (this.status == TicketStatus.UTILIZED)
             return false;
 
-        recalculatePrice();
         toLocation = newLocation;
+        recalculatePrice();
         return true;
     }
 
     @Override
     public boolean setFromLocation(Location newLocation) {
-        if (this.status == TicketStatus.BOUGHT)
+        if (this.status == TicketStatus.IN_PROCESS || this.status == TicketStatus.UTILIZED)
             return false;
 
-        recalculatePrice();
         fromLocation = newLocation;
+        recalculatePrice();
         return true;
     }
 
@@ -71,6 +67,10 @@ public class Ticket implements ITicket {
     @Override
     public double getTicketPrice() {
         return price;
+    }
+
+    public TicketStatus getStatus(){
+        return this.status;
     }
 
     private void recalculatePrice() {

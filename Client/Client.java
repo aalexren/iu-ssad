@@ -5,14 +5,19 @@ import SupportFiles.Location;
 import Client.Modules.RFIDModule;
 import Client.Modules.TicketModule;
 import Gates.GateResponse;
+import Gates.InGate;
+import Gates.IGate;
 
 interface IClient {
     public Ticket buyTicket(Location from, Location to);
-    public GateResponse activateInGate(Ticket ticket);
-    public GateResponse activateOutGate(Ticket ticket); 
+
+    public void makeGateRequest(Ticket ticket, IGate gate);
 }
 
 public class Client implements IClient {
+
+    private RFIDModule rfidModule;
+    private TicketModule ticketModule;
 
     public Client() {
 
@@ -24,18 +29,12 @@ public class Client implements IClient {
         return null;
     }
 
+    // Simulates situation when we attach ticket to the gate
+    // (RFID detects gate)
     @Override
-    public GateResponse activateInGate(Ticket ticket) {
-
-        return null;
+    public void makeGateRequest(Ticket ticket, IGate gate) {
+        GateResponse response = rfidModule.sendRequest(ticket, gate);
+        System.out.println(response);
     }
 
-    @Override
-    public GateResponse activateOutGate(Ticket ticket) {
-
-        return null;
-    }
-
-    private RFIDModule rfidModule;
-    private TicketModule ticketModule;
 }
