@@ -1,3 +1,5 @@
+package SupportFiles;
+
 enum TicketStatus {
     BOUGHT, IN_PROCESS, UTILIZED
 }
@@ -16,7 +18,7 @@ interface ITicket {
     boolean setFromLocation(Location newLocation);
 }
 
-class Ticket implements ITicket {
+public class Ticket implements ITicket {
     private Location fromLocation;
     private Location toLocation;
     private int ID;
