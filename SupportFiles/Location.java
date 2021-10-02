@@ -8,6 +8,10 @@ interface ILocation {
 public class Location implements ILocation {
     protected String location;
 
+    public Location(String location) {
+        this.location = location;
+    }
+
     @Override
     public String getLocation() {
         return location;

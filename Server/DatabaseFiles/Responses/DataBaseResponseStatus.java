@@ -1,5 +1,5 @@
 package Server.DatabaseFiles.Responses;
 
-public enum DatabaseResponseStatus{
+public enum DatabaseResponseStatus {
     SUCCESS, FAILURE
 }

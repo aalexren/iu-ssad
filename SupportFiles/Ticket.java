@@ -5,7 +5,7 @@ interface ITicket {
     
     Location getToLocation();
     
-    int getTicketID();
+    long getTicketID();
     
     double getTicketPrice();
     
@@ -17,11 +17,11 @@ interface ITicket {
 public class Ticket implements ITicket {
     private Location fromLocation;
     private Location toLocation;
-    private int ID;
+    private long ID;
     private double price;
     private TicketStatus status;
     
-    public Ticket(int ID, Location fromLocation, Location toLocation, double price) {
+    public Ticket(long ID, Location fromLocation, Location toLocation, double price) {
         this.ID = ID;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
@@ -60,7 +60,7 @@ public class Ticket implements ITicket {
     }
 
     @Override
-    public int getTicketID() {
+    public long getTicketID() {
         return ID;
     }
 
@@ -74,6 +74,6 @@ public class Ticket implements ITicket {
     }
 
     private void recalculatePrice() {
-        // Somehow change the price
+        // TODO omehow change the price
     }
 }

@@ -1,43 +1,62 @@
 package Server;
 
 import Server.DatabaseFiles.*;
-import Server.DatabaseFiles.Requests.DatabaseRequest;
+import Server.DatabaseFiles.Crypter.RequestCrypter;
+import Server.DatabaseFiles.Crypter.ResponseCrypter;
 import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseModules.*;
+import Server.DatabaseFiles.Requests.IDatabaseRequest;
 
 public class ServerManager implements IDatabase {
-    private Database Database;
+    // private Database Database;
 
     private IDatabaseModule paymentModule;
     private IDatabaseModule ticketStatusCheckingModule;
     private IDatabaseModule ticketStatusUpdationModule;
+    private IDatabaseModule ticketExtractionModule;
 
-    public ServerManager(IDatabaseModule paymentModule, IDatabaseModule ticketStatusCheckingModule, IDatabaseModule ticketStatusUpdationModule) {
+    public ServerManager(IDatabaseModule paymentModule,
+     IDatabaseModule ticketStatusCheckingModule,
+      IDatabaseModule ticketStatusUpdationModule,
+        IDatabaseModule ticketExtractionModule
+      ) {
         // this.Database = Database.getInstance();
         this.paymentModule = paymentModule;
         this.ticketStatusCheckingModule = ticketStatusCheckingModule;
         this.ticketStatusUpdationModule = ticketStatusUpdationModule;
+        this.ticketExtractionModule = ticketStatusUpdationModule;
     }
 
     public ServerManager(){
         paymentModule = new PaymentModule();
         ticketStatusCheckingModule = new TicketStatusCheckingModule();
         ticketStatusUpdationModule = new TicketStatusUpdationModule();
+        ticketExtractionModule = new TicketExtractionModule();
     }
 
     @Override
-    public IDatabaseResponse execute(DatabaseRequest request) {
+    public IDatabaseResponse execute(IDatabaseRequest request) {
+        IDatabaseResponse databaseResponse;
+        request = ((RequestCrypter) request).decrypt();
+
         switch (request.getHeader()) {
             case "BuyTicket":
-                return paymentModule.execute(request);
+                databaseResponse = paymentModule.execute(request);
+                break;
             case "GetTicketStatus":
-                return ticketStatusCheckingModule.execute(request);
+                databaseResponse = ticketStatusCheckingModule.execute(request);
+                break;
             case "SetTicketStatus":
-                return ticketStatusUpdationModule.execute(request);
+                databaseResponse = ticketStatusUpdationModule.execute(request);
+                break;
+            case "GetTicket":
+                databaseResponse = ticketExtractionModule.execute(request);
+                break;
             default:
                 System.out.println("Something went wrong in Server Manager");
+                databaseResponse = new DatabaseResponse(DatabaseResponseStatus.FAILURE);
         }
 
-        return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
+        return new ResponseCrypter(databaseResponse);
     }
 }

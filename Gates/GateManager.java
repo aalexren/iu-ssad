@@ -1,6 +1,8 @@
 package Gates;
 
 import Server.DatabaseFiles.IDatabase;
+import Server.DatabaseFiles.Crypter.RequestCrypter;
+import Server.DatabaseFiles.Crypter.ResponseCrypter;
 import Server.DatabaseFiles.Requests.*;
 import Server.DatabaseFiles.Responses.*;
 import SupportFiles.Ticket;
@@ -15,7 +17,9 @@ public class GateManager implements IGateManager {
 
     @Override
     public IDatabaseResponse sendRequest(DatabaseRequest request) {
-        return fireWall.execute(request);
+        RequestCrypter requestCrypter = new RequestCrypter(request);
+        IDatabaseResponse databaseResponse = fireWall.execute(requestCrypter);
+        return ((ResponseCrypter) databaseResponse).decrypt();
     }
 
     @Override
@@ -31,12 +35,7 @@ public class GateManager implements IGateManager {
     @Override
     public void setTicketStatus(Ticket ticket, TicketStatus status) {
         DatabaseRequest request = new SetTicketStatusRequest(ticket, status);
-        DatabaseResponse response = (DatabaseResponse) sendRequest(request);
+        sendRequest(request);
     }
 
-    @Override
-    public boolean DatabaseRequest(Ticket ticket, String request) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 }
