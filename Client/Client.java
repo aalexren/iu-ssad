@@ -10,6 +10,7 @@ import Client.Modules.TransferModule;
 import Client.Modules.UpdaterModule;
 import Gates.GateResponse;
 import Gates.IGate;
+import Server.Firewall;
 
 import java.util.ArrayList;
 
@@ -34,9 +35,9 @@ public class Client implements IClient {
         this.ticketList   = new ArrayList<Ticket>();
     }
 
-    public Client() {
+    public Client(Firewall firewall){
         this.rfidModule     = new RFIDModule();
-        this.transferModule = new TransferModule();
+        this.transferModule = new TransferModule(firewall);
         this.updaterModule  = new UpdaterModule(transferModule);
         this.ticketModule   = new TicketModule(transferModule);
         this.ticketList     = new ArrayList<Ticket>();

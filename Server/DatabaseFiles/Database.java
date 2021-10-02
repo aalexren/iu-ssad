@@ -9,8 +9,8 @@ import java.util.HashMap;
 public class Database implements IDatabase {
     private volatile static Database instance;
     private Database() { }
-    private HashMap <Long, TicketData> ticketData;
-    private HashMap <Long, Boolean> transactionData;
+    private HashMap <Long, TicketData> ticketData = new HashMap <Long, TicketData> () ;
+    private HashMap <Long, Boolean> transactionData = new HashMap <Long, Boolean>() ;
 
     public static Database getInstance() {
         if (instance == null) {

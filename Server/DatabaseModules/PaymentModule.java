@@ -25,8 +25,8 @@ public class PaymentModule implements IDatabaseModule {
         db.setTransaction(formalRequest.getTransactionID(), true);
 
         Ticket ticket = new Ticket(ticketID,
-            formalRequest.getLocationTo(),
             formalRequest.getLocationFrom(),
+            formalRequest.getLocationTo(),
             generatePrice(formalRequest.getLocationFrom(), formalRequest.getLocationTo()));
         db.addTicket(ticketID, new TicketData(ticket));
 

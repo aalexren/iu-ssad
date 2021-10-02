@@ -40,7 +40,7 @@ public class InGate implements IGate {
 
     @Override
     public GateResponse verifyLocation(Location locationToCompare) {
-        if (locationToCompare.getLocation() == this.location.getLocation()){
+        if (locationToCompare.getLocation().compareTo(this.location.getLocation()) == 0){
             return GateResponse.ACCEPTED;
         }
         return GateResponse.DENIED;

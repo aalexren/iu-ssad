@@ -11,6 +11,10 @@ import Server.DatabaseFiles.Crypter.ResponseCrypter;
 public class TransferModule {
     private IDatabase fireWall;
 
+    public TransferModule(IDatabase firewall){
+        this.fireWall = firewall;
+    }
+
     public IDatabaseResponse sendRequest(DatabaseRequest databaseRequest){
         RequestCrypter requestCrypter = new RequestCrypter(databaseRequest);
         IDatabaseResponse databaseResponse = fireWall.execute(requestCrypter);
