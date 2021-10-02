@@ -69,7 +69,7 @@ public class Ticket implements ITicket {
         return price;
     }
 
-    public TicketStatus getStatus(){
+    public TicketStatus getTicketStatus(){
         return this.status;
     }
 

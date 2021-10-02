@@ -1,18 +1,15 @@
 package Gates;
 
-import SupportFiles.*;
-
-import javax.xml.crypto.Data;
-
-import Server.DatabaseFiles.*;
-import Server.DatabaseFiles.Responses.DataBaseResponse;
-import Server.DatabaseFiles.Responses.IDataBaseResponse;
-import Server.DatabaseFiles.Responses.TicketStatusResponse;
+import Server.DatabaseFiles.Requests.*;
+import Server.DatabaseFiles.Responses.*;
+import SupportFiles.Ticket;
+import SupportFiles.TicketStatus;
 
 interface IGateManager {
     public boolean dataBaseRequest(Ticket ticket, String request);
     public TicketStatus getTicketStatus(Ticket ticket);
     public void setTicketStatus(Ticket ticket, TicketStatus status);
+    public IDataBaseResponse sendRequest(DataBaseRequest request);
 }
 
 public class GateManager implements IGateManager {
@@ -30,9 +27,9 @@ public class GateManager implements IGateManager {
 
     @Override
     public TicketStatus getTicketStatus(Ticket ticket) {
-        DataBaseRequest request = new GetTicketStatusRequest();
-        TicketStatusResponse response = sendRequest(request);
-        if (response.getStatus()){
+        DataBaseRequest request = new GetTicketStatusRequest(ticket);
+        TicketStatusResponse response = (TicketStatusResponse) sendRequest(request);
+        if (response.getStatus() == DataBaseResponseStatus.SUCCESS){
             return response.getTicketStatus();
         }
         return TicketStatus.UTILIZED;
@@ -41,8 +38,14 @@ public class GateManager implements IGateManager {
     
     @Override
     public void setTicketStatus(Ticket ticket, TicketStatus status) {
-        DataBaseRequest request = new SetTicketStatusRequest();
-        DataBaseResponse response = sendRequest(request);
+        DataBaseRequest request = new SetTicketStatusRequest(ticket);
+        DataBaseResponse response = (DataBaseResponse) sendRequest(request);
         
+    }
+
+    @Override
+    public boolean dataBaseRequest(Ticket ticket, String request) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

@@ -1,13 +1,13 @@
 package Server.DatabaseFiles.Responses;
 
 public class DataBaseResponse {
-    private boolean status;
+    private DataBaseResponseStatus status;
 
-    public boolean getStatus() {
+    public DataBaseResponseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(DataBaseResponseStatus status) {
         this.status = status;
     }
 }
