@@ -2,10 +2,10 @@ package Server.DatabaseFiles.Responses;
 
 import SupportFiles.TicketStatus;
 
-public class DataResponse extends DataBaseResponse implements IDataResponse {
+public class TicketStatusResponse extends DataBaseResponse {
     private TicketStatus ticketStatus;
 
-    public DataResponse(TicketStatus ticketStatus) {
+    public TicketStatusResponse(TicketStatus ticketStatus) {
         this.ticketStatus = ticketStatus;
     }
 

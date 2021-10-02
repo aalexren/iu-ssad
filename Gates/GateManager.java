@@ -7,6 +7,7 @@ import javax.xml.crypto.Data;
 import Server.DatabaseFiles.*;
 import Server.DatabaseFiles.Responses.DataBaseResponse;
 import Server.DatabaseFiles.Responses.IDataBaseResponse;
+import Server.DatabaseFiles.Responses.TicketStatusResponse;
 
 interface IGateManager {
     public boolean dataBaseRequest(Ticket ticket, String request);
