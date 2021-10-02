@@ -1,17 +1,17 @@
 package Server.DatabaseFiles.Responses;
 
-public class DataBaseResponse implements IDataBaseResponse {
-    private DataBaseResponseStatus status;
+public class DatabaseResponse implements IDatabaseResponse {
+    private DatabaseResponseStatus status;
 
-    public DataBaseResponse(DataBaseResponseStatus status) {
+    public DatabaseResponse(DatabaseResponseStatus status) {
         this.status = status;
     }
 
-    public DataBaseResponseStatus getStatus() {
+    public DatabaseResponseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(DataBaseResponseStatus status) {
+    public void setStatus(DatabaseResponseStatus status) {
         this.status = status;
     }
 }

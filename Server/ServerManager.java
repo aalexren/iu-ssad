@@ -1,25 +1,43 @@
 package Server;
+
 import Server.DatabaseFiles.*;
-import Server.DatabaseFiles.Requests.DataBaseRequest;
-import Server.DatabaseFiles.Responses.IDataBaseResponse;
-import Server.DatabaseModules.IPaymentModule;
-import Server.DatabaseModules.IValidationModule;
+import Server.DatabaseFiles.Requests.DatabaseRequest;
+import Server.DatabaseFiles.Responses.*;
+import Server.DatabaseModules.*;
 
 public class ServerManager implements IDatabase {
-    private Database database;
+    private Database Database;
 
-    private IPaymentModule paymentModule;
-    private IValidationModule validationModule;
+    private IDatabaseModule paymentModule;
+    private IDatabaseModule ticketStatusCheckingModule;
+    private IDatabaseModule ticketStatusUpdationModule;
 
-    public ServerManager(IPaymentModule paymentModule, IValidationModule validationModule) {
-        this.database = Database.getInstance();
+    public ServerManager(IDatabaseModule paymentModule, IDatabaseModule ticketStatusCheckingModule, IDatabaseModule ticketStatusUpdationModule) {
+        // this.Database = Database.getInstance();
         this.paymentModule = paymentModule;
-        this.validationModule = validationModule;
+        this.ticketStatusCheckingModule = ticketStatusCheckingModule;
+        this.ticketStatusUpdationModule = ticketStatusUpdationModule;
+    }
+
+    public ServerManager(){
+        paymentModule = new PaymentModule();
+        ticketStatusCheckingModule = new TicketStatusCheckingModule();
+        ticketStatusUpdationModule = new TicketStatusUpdationModule();
     }
 
     @Override
-    public IDataBaseResponse execute(DataBaseRequest request) {
-        // TODO Auto-generated method stub
-        return null;
+    public IDatabaseResponse execute(DatabaseRequest request) {
+        switch (request.getHeader()) {
+            case "BuyTicket":
+                return paymentModule.execute(request);
+            case "GetTicketStatus":
+                return ticketStatusCheckingModule.execute(request);
+            case "SetTicketStatus":
+                return ticketStatusUpdationModule.execute(request);
+            default:
+                System.out.println("Something went wrong in Server Manager");
+        }
+
+        return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
     }
 }

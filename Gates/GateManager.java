@@ -1,45 +1,41 @@
 package Gates;
 
-import Server.Firewall;
+import Server.DatabaseFiles.IDatabase;
 import Server.DatabaseFiles.Requests.*;
 import Server.DatabaseFiles.Responses.*;
 import SupportFiles.Ticket;
 import SupportFiles.TicketStatus;
 
 public class GateManager implements IGateManager {
-    // private IDatabase database;
-    private Firewall fireWall;
+    private IDatabase fireWall;
 
-    public GateManager(Firewall firewall) {
+    public GateManager(IDatabase firewall) {
         this.fireWall = firewall;
     }
 
     @Override
-    public IDataBaseResponse sendRequest(DataBaseRequest request) {
-        
+    public IDatabaseResponse sendRequest(DatabaseRequest request) {
         return fireWall.execute(request);
     }
 
     @Override
     public TicketStatus getTicketStatus(Ticket ticket) {
-        DataBaseRequest request = new GetTicketStatusRequest(ticket);
+        DatabaseRequest request = new GetTicketStatusRequest(ticket);
         TicketStatusResponse response = (TicketStatusResponse) sendRequest(request);
-        if (response.getStatus() == DataBaseResponseStatus.SUCCESS){
+        if (response.getStatus() == DatabaseResponseStatus.SUCCESS){
             return response.getTicketStatus();
         }
         return TicketStatus.UTILIZED;
-        // return response.status
     }
     
     @Override
     public void setTicketStatus(Ticket ticket, TicketStatus status) {
-        DataBaseRequest request = new SetTicketStatusRequest(ticket);
-        DataBaseResponse response = (DataBaseResponse) sendRequest(request);
-        
+        DatabaseRequest request = new SetTicketStatusRequest(ticket, status);
+        DatabaseResponse response = (DatabaseResponse) sendRequest(request);
     }
 
     @Override
-    public boolean dataBaseRequest(Ticket ticket, String request) {
+    public boolean DatabaseRequest(Ticket ticket, String request) {
         // TODO Auto-generated method stub
         return false;
     }

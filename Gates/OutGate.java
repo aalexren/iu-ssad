@@ -5,7 +5,6 @@ public class OutGate implements IGate {
 
 	private GateManager gateManager;
     private Location location;
-    // private static String secret =
 
     public OutGate(GateManager gateManager, Location location) {
         this.gateManager = gateManager;
@@ -15,14 +14,14 @@ public class OutGate implements IGate {
     
     @Override
     public GateResponse open() {
-        // TODO Auto-generated method stub
-        return null;
+        System.out.println("Open OutGate");
+        return GateResponse.ACCEPTED;       
     }
 
     @Override
     public GateResponse close() {
-        // TODO Auto-generated method stub
-        return null;
+        System.out.println("Close OutGate");
+        return GateResponse.ACCEPTED;
     }
 
 	@Override

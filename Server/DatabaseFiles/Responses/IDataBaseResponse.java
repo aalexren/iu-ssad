@@ -1,5 +1,5 @@
 package Server.DatabaseFiles.Responses;
 
-public interface IDataBaseResponse {
-    public DataBaseResponseStatus getStatus();
+public interface IDatabaseResponse {
+    public DatabaseResponseStatus getStatus();
 }

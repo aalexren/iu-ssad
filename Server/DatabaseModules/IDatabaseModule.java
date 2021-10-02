@@ -1,8 +1,8 @@
-package Server.DatabaseFiles;
+package Server.DatabaseModules;
 
 import Server.DatabaseFiles.Requests.DatabaseRequest;
 import Server.DatabaseFiles.Responses.IDatabaseResponse;
 
-public interface IDatabase {
+public interface IDatabaseModule {
     public IDatabaseResponse execute(DatabaseRequest request);
 }

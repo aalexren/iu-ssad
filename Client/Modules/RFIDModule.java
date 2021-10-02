@@ -11,6 +11,8 @@ import Gates.IGate;
 
 public class RFIDModule {
 
+    int ID;
+
    public GateResponse sendRequest(Ticket ticket, IGate gate){
         return gate.manageRequest(ticket);
     }

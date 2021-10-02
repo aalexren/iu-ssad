@@ -14,15 +14,15 @@ public class Firewall implements IDatabase {
     }
 
     public Firewall() {
-        this.serverManager = new ServerManager(new PaymentModule(), new ValidationModule());
+        this.serverManager = new ServerManager(new PaymentModule(), new TicketStatusCheckingModule(), new TicketStatusUpdationModule());
     }
 
     @Override
-    public IDataBaseResponse execute(DataBaseRequest request) {
+    public IDatabaseResponse execute(DatabaseRequest request) {
         if (checkConnection()){
             return serverManager.execute(request);
         }
-        return new DataBaseResponse(DataBaseResponseStatus.FAILURE);
+        return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
     }
     
 }
