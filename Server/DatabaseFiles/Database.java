@@ -1,5 +1,8 @@
 package Server.DatabaseFiles;
 
+import Server.DatabaseFiles.Responses.IDataBaseResponse;
+import Server.DatabaseFiles.Requests.DataBaseRequest;
+
 public class Database implements IDatabase {
     private volatile static Database instance;
     private Database() { }
@@ -14,8 +17,9 @@ public class Database implements IDatabase {
         return instance;
     }
 
-    @Override
-    public void execute() {
-
-    }
+	@Override
+	public IDataBaseResponse execute(DataBaseRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -2,7 +2,7 @@ package Server.DatabaseFiles.Requests;
 
 import SupportFiles.Ticket;
 
-public class SetTicketStatusRequest extends DataBaseRequest{
+public class SetTicketStatusRequest extends DataBaseRequest { 
     private Ticket ticket;
 
     public SetTicketStatusRequest(Ticket ticket){
@@ -10,7 +10,7 @@ public class SetTicketStatusRequest extends DataBaseRequest{
         this.ticket = ticket;
     }
 
-    public Ticket getTicket(){
+    public Ticket getTicket() {
         return this.ticket;
     }
 }

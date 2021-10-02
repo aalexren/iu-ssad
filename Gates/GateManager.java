@@ -1,28 +1,23 @@
 package Gates;
 
+import Server.Firewall;
 import Server.DatabaseFiles.Requests.*;
 import Server.DatabaseFiles.Responses.*;
 import SupportFiles.Ticket;
 import SupportFiles.TicketStatus;
 
-interface IGateManager {
-    public boolean dataBaseRequest(Ticket ticket, String request);
-    public TicketStatus getTicketStatus(Ticket ticket);
-    public void setTicketStatus(Ticket ticket, TicketStatus status);
-    public IDataBaseResponse sendRequest(DataBaseRequest request);
-}
-
 public class GateManager implements IGateManager {
     // private IDatabase database;
+    private Firewall fireWall;
 
-    public GateManager() {
-
+    public GateManager(Firewall firewall) {
+        this.fireWall = firewall;
     }
 
     @Override
     public IDataBaseResponse sendRequest(DataBaseRequest request) {
-
-        return null;
+        
+        return fireWall.execute(request);
     }
 
     @Override
