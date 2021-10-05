@@ -2,16 +2,12 @@ package SupportFiles;
 
 interface ITicket {
     Location getFromLocation();
-    
+
     Location getToLocation();
-    
+
     long getTicketID();
-    
+
     double getTicketPrice();
-    
-    boolean setToLocation(Location newLocation);
-    
-    boolean setFromLocation(Location newLocation);
 }
 
 public class Ticket implements ITicket {
@@ -20,9 +16,9 @@ public class Ticket implements ITicket {
     private long ID;
     private double price;
     private TicketStatus status;
-    
-    public Ticket(long ID, Location fromLocation, Location toLocation, double price) {
-        this.ID = ID;
+
+    public Ticket(Long ticketID, Location fromLocation, Location toLocation, double price) {
+        this.ID = ticketID;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
         this.price = price;
@@ -40,26 +36,6 @@ public class Ticket implements ITicket {
     }
 
     @Override
-    public boolean setToLocation(Location newLocation) {
-        if (this.status == TicketStatus.UTILIZED)
-            return false;
-
-        toLocation = newLocation;
-        recalculatePrice();
-        return true;
-    }
-
-    @Override
-    public boolean setFromLocation(Location newLocation) {
-        if (this.status == TicketStatus.IN_PROCESS || this.status == TicketStatus.UTILIZED)
-            return false;
-
-        fromLocation = newLocation;
-        recalculatePrice();
-        return true;
-    }
-
-    @Override
     public long getTicketID() {
         return ID;
     }
@@ -69,11 +45,11 @@ public class Ticket implements ITicket {
         return price;
     }
 
-    public TicketStatus getTicketStatus(){
+    public TicketStatus getTicketStatus() {
         return this.status;
     }
 
     private void recalculatePrice() {
-        // TODO omehow change the price
+        // TODO somehow change the price
     }
 }

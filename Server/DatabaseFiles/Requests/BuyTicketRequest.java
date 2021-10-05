@@ -1,16 +1,17 @@
 package Server.DatabaseFiles.Requests;
 
 import SupportFiles.PaymentMethods;
+
 import SupportFiles.Location;
 
-public class BuyTicketRequest extends DatabaseRequest{
+public class BuyTicketRequest extends DatabaseRequest {
 
     private PaymentMethods paymentMethod;
     private Location from;
     private Location to;
-    private long transactionID;
+    private Long transactionID;
 
-    public BuyTicketRequest(PaymentMethods paymentMethod, Location from, Location to, long transactionID){
+    public BuyTicketRequest(PaymentMethods paymentMethod, Location from, Location to, Long transactionID) {
         super("BuyTicket");
         this.paymentMethod = paymentMethod;
         this.from = from;
@@ -18,19 +19,19 @@ public class BuyTicketRequest extends DatabaseRequest{
         this.transactionID = transactionID;
     }
 
-    public PaymentMethods getPaymentMethod(){
+    public PaymentMethods getPaymentMethod() {
         return paymentMethod;
     }
 
-    public Location getLocationFrom(){
+    public Location getLocationFrom() {
         return from;
     }
 
-    public Location getLocationTo(){
+    public Location getLocationTo() {
         return to;
     }
 
-    public long getTransactionID(){
+    public Long getTransactionID() {
         return transactionID;
     }
 

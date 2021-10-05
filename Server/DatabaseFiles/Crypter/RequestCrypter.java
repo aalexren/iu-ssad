@@ -2,6 +2,9 @@ package Server.DatabaseFiles.Crypter;
 
 import Server.DatabaseFiles.Requests.IDatabaseRequest;
 
+/* 
+* Used for encrypting and decrypting objects that implement IDatabaseRequest
+*/
 public class RequestCrypter implements IDatabaseRequest {
     private IDatabaseRequest databaseRequest;
     private boolean encrypted;
@@ -10,7 +13,7 @@ public class RequestCrypter implements IDatabaseRequest {
         this.databaseRequest = databaseRequest;
         encrypted = true;
     }
-    
+
     public IDatabaseRequest decrypt() {
         encrypted = false;
         return databaseRequest;
@@ -19,5 +22,5 @@ public class RequestCrypter implements IDatabaseRequest {
     @Override
     public String getHeader() {
         return databaseRequest.getHeader();
-    }   
+    }
 }

@@ -5,12 +5,16 @@ import Server.DatabaseFiles.Requests.IDatabaseRequest;
 import SupportFiles.*;
 import java.util.HashMap;
 
-
+/*
+* Singleton class
+*/
 public class Database implements IDatabase {
     private volatile static Database instance;
-    private Database() { }
-    private HashMap <Long, TicketData> ticketData = new HashMap <Long, TicketData> () ;
+
+    private HashMap <Long, TicketData> ticketData   = new HashMap <Long, TicketData>() ;
     private HashMap <Long, Boolean> transactionData = new HashMap <Long, Boolean>() ;
+
+    private Database() { } 
 
     public static Database getInstance() {
         if (instance == null) {
@@ -34,11 +38,13 @@ public class Database implements IDatabase {
         TicketData tempTicket = getTicket(ID);  
         tempTicket.status = status;
         ticketData.replace(Long.valueOf(ID), tempTicket);
-       return new TicketStatusResponse(DatabaseResponseStatus.SUCCESS, status);
+
+        return new TicketStatusResponse(DatabaseResponseStatus.SUCCESS, status);
     } 
 
     public TicketStatusResponse getTicketStatusResponse(long ID) {
         TicketStatus ticketStatus = getTicket(ID).status;
+
         return new TicketStatusResponse(DatabaseResponseStatus.SUCCESS, ticketStatus);
     }
 
@@ -61,7 +67,7 @@ public class Database implements IDatabase {
         ticketData.put(id, ticket);
     }
 
-    // MARK: - Transaction Methods
+    // Transaction Methods
 
     public void setTransaction(long id, Boolean status) {
         if (transactionData.get(Long.valueOf(id)) == null) {

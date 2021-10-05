@@ -2,14 +2,24 @@ package Client.Modules;
 
 import Gates.GateResponse;
 import SupportFiles.Ticket;
+
 import Client.Modules.RFIDModule;
 import Gates.IGate;
 
+import java.util.UUID;
+
+/*
+ * This class supposed to be just a mediator between the gates and the client.
+ */
 public class RFIDModule {
 
-    int ID;
+    private final UUID id; // Unique hash to identify the RFID
 
-    public GateResponse sendRequest(Ticket ticket, IGate gate){
+    public RFIDModule() {
+        id = UUID.randomUUID();
+    }
+
+    public GateResponse sendRequest(Ticket ticket, IGate gate) {
         return gate.manageRequest(ticket);
     }
 }

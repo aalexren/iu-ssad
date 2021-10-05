@@ -3,7 +3,10 @@ package Server.DatabaseFiles.Crypter;
 import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
 import Server.DatabaseFiles.Responses.IDatabaseResponse;
 
-public class ResponseCrypter implements IDatabaseResponse{
+/*
+ * Used for encrypting and decrypting objects that implement IDatabaseResponse
+ */
+public class ResponseCrypter implements IDatabaseResponse {
     private IDatabaseResponse databaseResponse;
     private boolean encrypted;
 
@@ -12,12 +15,12 @@ public class ResponseCrypter implements IDatabaseResponse{
         return databaseResponse.getStatus();
     }
 
-    public ResponseCrypter(IDatabaseResponse databaseResponse){
+    public ResponseCrypter(IDatabaseResponse databaseResponse) {
         this.databaseResponse = databaseResponse;
         encrypted = true;
     }
-    
-    public IDatabaseResponse decrypt(){
+
+    public IDatabaseResponse decrypt() {
         encrypted = false;
         return databaseResponse;
     }

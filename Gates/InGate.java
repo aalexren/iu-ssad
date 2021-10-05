@@ -2,6 +2,9 @@ package Gates;
 
 import SupportFiles.*;
 
+/*
+* Gate of entrance
+*/
 public class InGate implements IGate {
 
     private GateManager gateManager;
@@ -14,13 +17,13 @@ public class InGate implements IGate {
 
     @Override
     public GateResponse open() {
-        System.out.println("Open InGate");
+        // System.out.println("Open InGate");
         return GateResponse.ACCEPTED;
     }
 
     @Override
     public GateResponse close() {
-        System.out.println("Close InGate");
+        // System.out.println("Close InGate");
         return GateResponse.ACCEPTED;
     }
 
@@ -40,7 +43,7 @@ public class InGate implements IGate {
 
     @Override
     public GateResponse verifyLocation(Location locationToCompare) {
-        if (locationToCompare.getLocation().compareTo(this.location.getLocation()) == 0){
+        if (locationToCompare.getLocation().compareTo(this.location.getLocation()) == 0) {
             return GateResponse.ACCEPTED;
         }
         return GateResponse.DENIED;

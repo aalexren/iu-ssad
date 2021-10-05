@@ -14,10 +14,11 @@ import Server.Firewall;
 
 import java.util.ArrayList;
 
-
 interface IClient {
     public void buyTicket(Location from, Location to, PaymentMethods paymentMethod);
+
     public void makeGateRequest(Ticket ticket, IGate gate);
+
     public void updateTickets();
 }
 
@@ -30,33 +31,41 @@ public class Client implements IClient {
     private ArrayList<Ticket> ticketList;
 
     public Client(RFIDModule rfidModule, TicketModule ticketModule) {
-        this.rfidModule   = rfidModule;
+        this.rfidModule = rfidModule;
         this.ticketModule = ticketModule;
-        this.ticketList   = new ArrayList<Ticket>();
+        this.ticketList = new ArrayList<Ticket>();
     }
 
-    public Client(Firewall firewall){
-        this.rfidModule     = new RFIDModule();
+    public Client(Firewall firewall) {
+        this.rfidModule = new RFIDModule();
         this.transferModule = new TransferModule(firewall);
-        this.updaterModule  = new UpdaterModule(transferModule);
-        this.ticketModule   = new TicketModule(transferModule);
-        this.ticketList     = new ArrayList<Ticket>();
+        this.updaterModule = new UpdaterModule(transferModule);
+        this.ticketModule = new TicketModule(transferModule);
+        this.ticketList = new ArrayList<Ticket>();
     }
 
-    public Ticket getTicket() {
-        if (ticketList.isEmpty()) return null;
+    public Ticket chooseTicket(Location from, Location to) {
+        if (ticketList.isEmpty())
+            return null;
 
-        return ticketList.stream()
-                         .filter(x -> x.getTicketStatus() == TicketStatus.BOUGHT)
-                         .findFirst()
-                         .get();
+        for (Ticket ticket : ticketList) {
+            if (ticket.getTicketStatus() != TicketStatus.BOUGHT)
+                continue;
+
+            if (ticket.getFromLocation().getLocation().compareTo(from.getLocation()) == 0 && 
+                ticket.getToLocation().getLocation().compareTo(to.getLocation()) == 0) 
+                return ticket;
+            
+        }
+        
+        return null; // we didn't find such ticket
     }
 
     @Override
     public void buyTicket(Location from, Location to, PaymentMethods paymentMethod) {
         Ticket ticket = ticketModule.sendBuyTicketRequest(paymentMethod, from, to);
 
-        if (ticket != null){
+        if (ticket != null) {
             ticketList.add(ticket);
         }
     }
@@ -71,9 +80,9 @@ public class Client implements IClient {
 
     public void updateTickets() {
         ArrayList<Ticket> temp = new ArrayList<Ticket>();
-        for (int i = 0; i < ticketList.size(); ++i) {
+        for (int i = 0; i < ticketList.size(); ++i)
             temp.add(updaterModule.getTicket(ticketList.get(i)));
-        }
+
         ticketList = temp;
     }
 

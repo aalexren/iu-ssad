@@ -10,4 +10,4 @@ public class DatabaseRequest implements IDatabaseRequest {
     public String getHeader() {
         return this.header;
     }
-} 
+}

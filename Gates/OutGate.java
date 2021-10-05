@@ -1,9 +1,13 @@
 package Gates;
+
 import SupportFiles.*;
 
+/*
+* Gate of exit
+*/
 public class OutGate implements IGate {
 
-	private GateManager gateManager;
+    private GateManager gateManager;
     private Location location;
 
     public OutGate(GateManager gateManager, Location location) {
@@ -11,20 +15,17 @@ public class OutGate implements IGate {
         this.location = location;
     }
 
-    
     @Override
     public GateResponse open() {
-        System.out.println("Open OutGate");
-        return GateResponse.ACCEPTED;       
+        return GateResponse.ACCEPTED;
     }
 
     @Override
     public GateResponse close() {
-        System.out.println("Close OutGate");
         return GateResponse.ACCEPTED;
     }
 
-	@Override
+    @Override
     public GateResponse manageRequest(Ticket ticket) {
         TicketStatus ticketStatus = gateManager.getTicketStatus(ticket);
 
@@ -46,5 +47,4 @@ public class OutGate implements IGate {
         return GateResponse.DENIED;
     }
 
-    
 }

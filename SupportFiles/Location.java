@@ -2,6 +2,7 @@ package SupportFiles;
 
 interface ILocation {
     String getLocation();
+
     void setLocation(String newLocation);
 }
 
