@@ -124,18 +124,6 @@ public class Main {
         client.makeGateRequest(client.chooseTicket(Moscow, Innopolis), MoscowInGate);
         System.out.println();
 
-        /* Test #8 */
-        /*
-         * Situation: We have ticket from Moscow to Samara, and make a try to exit
-         * transport in Samara (actual destination location)
-         */
-        /*
-         * Result: Gate should open, all is correct --> ACCEPTED
-         */
-        System.out.println("Test #8  --> ACCEPTED");
-        client.makeGateRequest(client.chooseTicket(Moscow, Samara), SamaraOutGate);
-        System.out.println();
-
         /* Test #9 */
         /*
          * Situation: We have bought 2 tickets with different "from" locations, but same
