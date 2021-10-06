@@ -1,6 +1,6 @@
 ## RFID Based Public Transport Ticketing System
 
-![](https://img.shields.io/github/issues/aalexren/RFID-System) ![](https://img.shields.io/github/stars/aalexren/RFID-System) ![](https://img.shields.io/github/license/aalexren/RFID-System)
+![](https://img.shields.io/github/issues/aalexren/RFID-System) ![](https://img.shields.io/github/stars/aalexren/RFID-System) ![](https://img.shields.io/github/license/aalexren/RFID-System) [![build](https://github.com/aalexren/RFID-System/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/aalexren/RFID-System/actions/workflows/github-actions-demo.yml)
 
 ### Assignment 1 SSAD Course
 
