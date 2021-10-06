@@ -3,7 +3,7 @@
     <target name="compile">
         <mkdir dir="build/classes"/>
         <javac destdir="build/classes" includeantruntime="false">
-            <src path="../../"/>
+            <src path="."/>
         </javac>
     </target>
     <target name="run" depends="compile">
