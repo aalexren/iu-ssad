@@ -14,7 +14,7 @@ public class ResponseCrypter implements IDatabaseResponse {
     public DatabaseResponseStatus getStatus() {
         return databaseResponse.getStatus();
     }
-
+ 
     public ResponseCrypter(IDatabaseResponse databaseResponse) {
         this.databaseResponse = databaseResponse;
         encrypted = true;

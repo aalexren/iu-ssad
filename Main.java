@@ -54,7 +54,7 @@ public class Main {
          * in Samara
          */
         /*
-         * Result: Gate should not open, because of fromg location destination -->
+         * Result: Gate should not open, because of wromg location destination -->
          * DENIED
          */
         System.out.println("Test #2 --> DENIED");

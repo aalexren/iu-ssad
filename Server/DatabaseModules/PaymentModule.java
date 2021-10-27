@@ -15,20 +15,27 @@ public class PaymentModule implements IDatabaseModule {
         Long ticketID = generateTicketID();
         Database db = Database.getInstance();
 
-        BuyTicketRequest formalRequest = (BuyTicketRequest)request;
+        BuyTicketRequest formalRequest = (BuyTicketRequest) request;
 
         // Registry transaction
-        db.setTransaction(formalRequest.getTransactionID(), false);
+        TransactionTableRequest createTransactionRequest = new TransactionTableRequest(formalRequest.getTransactionID(),
+                false);
+        db.create(createTransactionRequest);
 
         if (!sendMoney(formalRequest.getPaymentMethod()) || !checkMoneyReceiving()) {
             return new TicketResponse(DatabaseResponseStatus.FAILURE, null);
         }
 
-        db.setTransaction(formalRequest.getTransactionID(), true);
+        // Update transaction
+        TransactionTableRequest updateTransactionRequest = new TransactionTableRequest(formalRequest.getTransactionID(),
+                true);
+        db.update(updateTransactionRequest);
 
         Ticket ticket = new Ticket(ticketID, formalRequest.getLocationFrom(), formalRequest.getLocationTo(),
                 generatePrice(formalRequest.getLocationFrom(), formalRequest.getLocationTo()));
-        db.addTicket(ticketID, new TicketData(ticket));
+
+        TicketTableRequest createTicketRequest = new TicketTableRequest(ticketID, new TicketData(ticket));
+        db.create(createTicketRequest);
 
         return new TicketResponse(DatabaseResponseStatus.SUCCESS, ticket);
     }

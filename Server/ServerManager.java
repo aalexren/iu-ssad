@@ -7,7 +7,7 @@ import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseModules.*;
 import Server.DatabaseFiles.Requests.IDatabaseRequest;
 
-/* 
+/*
 * Manage requests to and responses from database
 */
 public class ServerManager implements IDatabase {
@@ -38,6 +38,7 @@ public class ServerManager implements IDatabase {
 
         switch (request.getHeader()) {
         case "BuyTicket":
+            // database.readModule.get("Ticket table", info);
             databaseResponse = paymentModule.execute(request);
             break;
         case "GetTicketStatus":
