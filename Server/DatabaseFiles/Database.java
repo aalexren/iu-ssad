@@ -2,7 +2,7 @@ package Server.DatabaseFiles;
 
 import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseFiles.TableRequests.*;
-import Server.DatabaseFiles.Requests.IDatabaseRequest;
+import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Tables.*;
 import Server.DatabaseFiles.*;
 
@@ -28,12 +28,12 @@ public class Database implements IDatabase {
     }
 
     @Override
-    public IDatabaseResponse execute(IDatabaseRequest request) {
+    public IResponse execute(IServerRequest request) {
 
         return null;
     }
 
-    public DatabaseResponse create(TableRequest request) {
+    public ServerResponse create(TableRequest request) {
         switch (request.getTableType()) {
         case TicketTable:
             return ticketTable.create(request);
@@ -41,11 +41,11 @@ public class Database implements IDatabase {
             return transactionTable.create(request);
         default:
             System.out.println("Something went wrong in Database");
-            return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
+            return new ServerResponse(ResponseStatus.FAILURE);
         }
     }
 
-    public DatabaseResponse read(TableRequest request) {
+    public ServerResponse read(TableRequest request) {
         switch (request.getTableType()) {
         case TicketTable:
             return ticketTable.read(request);
@@ -53,11 +53,11 @@ public class Database implements IDatabase {
             return transactionTable.read(request);
         default:
             System.out.println("Something went wrong in Database");
-            return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
+            return new ServerResponse(ResponseStatus.FAILURE);
         }
     }
 
-    public DatabaseResponse update(TableRequest request) {
+    public ServerResponse update(TableRequest request) {
         switch (request.getTableType()) {
         case TicketTable:
             return ticketTable.update(request);
@@ -65,11 +65,11 @@ public class Database implements IDatabase {
             return transactionTable.update(request);
         default:
             System.out.println("Something went wrong in Database");
-            return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
+            return new ServerResponse(ResponseStatus.FAILURE);
         }
     }
 
-    public DatabaseResponse delete(TableRequest request) {
+    public ServerResponse delete(TableRequest request) {
         switch (request.getTableType()) {
         case TicketTable:
             return ticketTable.delete(request);
@@ -77,7 +77,7 @@ public class Database implements IDatabase {
             return transactionTable.delete(request);
         default:
             System.out.println("Something went wrong in Database");
-            return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
+            return new ServerResponse(ResponseStatus.FAILURE);
         }
     }
 

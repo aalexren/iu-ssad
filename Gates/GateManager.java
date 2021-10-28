@@ -13,12 +13,12 @@ interface IGateManager {
 
     public void setTicketStatus(Ticket ticket, TicketStatus status);
 
-    public IDatabaseResponse sendRequest(DatabaseRequest request);
+    public IResponse sendRequest(ServerRequest request);
 }
 
 /*
-* Manage connection of IGate classes and database
-*/
+ * Manage connection of IGate classes and database
+ */
 public class GateManager implements IGateManager {
     private IDatabase fireWall;
 
@@ -27,19 +27,19 @@ public class GateManager implements IGateManager {
     }
 
     @Override
-    public IDatabaseResponse sendRequest(DatabaseRequest request) {
+    public IResponse sendRequest(ServerRequest request) {
         RequestCrypter requestCrypter = new RequestCrypter(request);
-        IDatabaseResponse databaseResponse = fireWall.execute(requestCrypter);
+        IResponse databaseResponse = fireWall.execute(requestCrypter);
 
-        return ((ResponseCrypter)databaseResponse).decrypt();
+        return ((ResponseCrypter) databaseResponse).decrypt();
     }
 
     @Override
     public TicketStatus getTicketStatus(Ticket ticket) {
-        DatabaseRequest request = new GetTicketStatusRequest(ticket);
-        TicketStatusResponse response = (TicketStatusResponse)sendRequest(request);
+        ServerRequest request = new GetTicketStatusRequest(ticket);
+        TicketStatusResponse response = (TicketStatusResponse) sendRequest(request);
 
-        if (response.getStatus() == DatabaseResponseStatus.SUCCESS)
+        if (response.getStatus() == ResponseStatus.SUCCESS)
             return response.getTicketStatus();
 
         return TicketStatus.UTILIZED;
@@ -47,7 +47,7 @@ public class GateManager implements IGateManager {
 
     @Override
     public void setTicketStatus(Ticket ticket, TicketStatus status) {
-        DatabaseRequest request = new SetTicketStatusRequest(ticket, status);
+        ServerRequest request = new SetTicketStatusRequest(ticket, status);
         sendRequest(request);
     }
 

@@ -2,8 +2,8 @@ package Client.Modules;
 
 import Server.DatabaseFiles.IDatabase;
 import Server.DatabaseFiles.Crypter.RequestCrypter;
-import Server.DatabaseFiles.Requests.DatabaseRequest;
-import Server.DatabaseFiles.Responses.IDatabaseResponse;
+import Server.DatabaseFiles.Requests.IServerRequest;
+import Server.DatabaseFiles.Responses.IResponse;
 import Server.DatabaseFiles.Crypter.ResponseCrypter;
 
 /*
@@ -17,9 +17,9 @@ public class TransferModule {
         this.fireWall = firewall;
     }
 
-    public IDatabaseResponse sendRequest(DatabaseRequest databaseRequest) {
+    public IResponse sendRequest(IServerRequest databaseRequest) {
         RequestCrypter requestCrypter = new RequestCrypter(databaseRequest);
-        IDatabaseResponse databaseResponse = fireWall.execute(requestCrypter);
+        IResponse databaseResponse = fireWall.execute(requestCrypter);
         return ((ResponseCrypter)databaseResponse).decrypt();
     }
 }

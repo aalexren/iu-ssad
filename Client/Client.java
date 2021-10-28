@@ -4,6 +4,7 @@ import SupportFiles.Ticket;
 import SupportFiles.TicketStatus;
 import SupportFiles.Location;
 import SupportFiles.PaymentMethods;
+import Client.Modules.NotificationModule;
 import Client.Modules.RFIDModule;
 import Client.Modules.TicketModule;
 import Client.Modules.TransferModule;
@@ -11,6 +12,7 @@ import Client.Modules.UpdaterModule;
 import Gates.GateResponse;
 import Gates.IGate;
 import Server.Firewall;
+import Client.Notifications.*;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class Client implements IClient {
     private RFIDModule rfidModule;
     private TicketModule ticketModule;
     private UpdaterModule updaterModule;
+    private NotificationModule notificationModule;
     private ArrayList<Ticket> ticketList;
 
     public Client(RFIDModule rfidModule, TicketModule ticketModule) {
@@ -41,6 +44,7 @@ public class Client implements IClient {
         this.transferModule = new TransferModule(firewall);
         this.updaterModule = new UpdaterModule(transferModule);
         this.ticketModule = new TicketModule(transferModule);
+        this.notificationModule = new NotificationModule(transferModule);
         this.ticketList = new ArrayList<Ticket>();
     }
 
@@ -52,12 +56,12 @@ public class Client implements IClient {
             if (ticket.getTicketStatus() != TicketStatus.BOUGHT)
                 continue;
 
-            if (ticket.getFromLocation().getLocation().compareTo(from.getLocation()) == 0 && 
-                ticket.getToLocation().getLocation().compareTo(to.getLocation()) == 0) 
+            if (ticket.getFromLocation().getLocation().compareTo(from.getLocation()) == 0
+                    && ticket.getToLocation().getLocation().compareTo(to.getLocation()) == 0)
                 return ticket;
-            
+
         }
-        
+
         return null; // we didn't find such ticket
     }
 
@@ -67,6 +71,7 @@ public class Client implements IClient {
 
         if (ticket != null) {
             ticketList.add(ticket);
+            notificationModule.sendNotification();
         }
     }
 
@@ -86,4 +91,19 @@ public class Client implements IClient {
         ticketList = temp;
     }
 
+    public void setNotifications(Boolean smsEnabled, Boolean emailEnabled, Boolean telegramEnabled) {
+        Notifier stack = new Notifier();
+
+        if (smsEnabled){
+            stack = new SMSDecorator(stack);
+        }
+        if (emailEnabled){
+            stack = new EmailDecorator(stack);
+        }
+        if (telegramEnabled){
+            stack = new TelegramDecorator(stack);
+        }
+
+        notificationModule.setNotificationStack(stack);
+    }
 }

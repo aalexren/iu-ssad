@@ -7,13 +7,13 @@ import Server.DatabaseFiles.Requests.BuyTicketRequest;
 import Server.DatabaseFiles.Responses.TicketResponse;
 import Server.DatabaseFiles.TableRequests.TicketTableRequest;
 import Server.DatabaseFiles.TableRequests.TransactionTableRequest;
-import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
-import Server.DatabaseFiles.Responses.IDatabaseResponse;
-import Server.DatabaseFiles.Requests.IDatabaseRequest;
+import Server.DatabaseFiles.Responses.ResponseStatus;
+import Server.DatabaseFiles.Responses.IResponse;
+import Server.DatabaseFiles.Requests.IServerRequest;
 import SupportFiles.*;
 
 public class PaymentModule implements IDatabaseModule {
-    public IDatabaseResponse execute(IDatabaseRequest request) {
+    public IResponse execute(IServerRequest request) {
         Long ticketID = generateTicketID();
         Database db = Database.getInstance();
 
@@ -25,7 +25,7 @@ public class PaymentModule implements IDatabaseModule {
         db.create(createTransactionRequest);
 
         if (!sendMoney(formalRequest.getPaymentMethod()) || !checkMoneyReceiving()) {
-            return new TicketResponse(DatabaseResponseStatus.FAILURE, null);
+            return new TicketResponse(ResponseStatus.FAILURE, null);
         }
 
         // Update transaction
@@ -39,7 +39,7 @@ public class PaymentModule implements IDatabaseModule {
         TicketTableRequest createTicketRequest = new TicketTableRequest(ticketID, new TicketData(ticket));
         db.create(createTicketRequest);
 
-        return new TicketResponse(DatabaseResponseStatus.SUCCESS, ticket);
+        return new TicketResponse(ResponseStatus.SUCCESS, ticket);
     }
 
     private boolean sendMoney(PaymentMethods paymentMethods) {

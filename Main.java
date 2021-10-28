@@ -14,6 +14,10 @@ public class Main {
         // User device clent
         Client client = new Client(firewall);
 
+        // Set notification types | SMS - on, Email - off, Telegram - on
+        // Now a notification will be received for the selected type 
+        client.setNotifications(true, false, true);
+
         // Physical device wich manages communication between open/close gateates and
         // server
         GateManager gateManager = new GateManager(firewall);

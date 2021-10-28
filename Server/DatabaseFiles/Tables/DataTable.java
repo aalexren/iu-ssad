@@ -5,11 +5,11 @@ import Server.DatabaseFiles.TableRequests.TableRequest;
 
 public interface DataTable {
 
-    public DatabaseResponse read(TableRequest request);
+    public ServerResponse read(TableRequest request);
 
-    public DatabaseResponse update(TableRequest request);
+    public ServerResponse update(TableRequest request);
 
-    public DatabaseResponse create(TableRequest request);
+    public ServerResponse create(TableRequest request);
 
-    public DatabaseResponse delete(TableRequest request);
+    public ServerResponse delete(TableRequest request);
 }

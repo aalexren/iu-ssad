@@ -4,6 +4,7 @@ import Server.DatabaseFiles.*;
 import Server.DatabaseFiles.Requests.*;
 import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseModules.*;
+import Server.ServerModules.NotifierModule;
 
 /*
 * Firewall is used to control access to server manager
@@ -19,15 +20,15 @@ public class Firewall implements IDatabase {
 
     public Firewall() {
         this.serverManager = new ServerManager(new PaymentModule(), new TicketStatusCheckingModule(),
-                new TicketStatusUpdationModule(), new TicketExtractionModule());
+                new TicketStatusUpdationModule(), new TicketExtractionModule(), new NotifierModule());
     }
 
     @Override
-    public IDatabaseResponse execute(IDatabaseRequest request) {
+    public IResponse execute(IServerRequest request) {
         if (checkConnection()) {
             return serverManager.execute(request);
         }
-        return new DatabaseResponse(DatabaseResponseStatus.FAILURE);
+        return new ServerResponse(ResponseStatus.FAILURE);
     }
 
 }

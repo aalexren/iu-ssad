@@ -3,8 +3,8 @@
 import java.util.HashMap;
 
 import Server.DatabaseFiles.TicketData;
-import Server.DatabaseFiles.Responses.DatabaseResponse;
-import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
+import Server.DatabaseFiles.Responses.ServerResponse;
+import Server.DatabaseFiles.Responses.ResponseStatus;
 import SupportFiles.Ticket;
 import SupportFiles.TicketStatus;
 import Server.DatabaseFiles.Responses.TicketResponse;
@@ -19,30 +19,30 @@ public class TicketTable implements DataTable {
         data = new HashMap<>();
     }
 
-    public DatabaseResponse read(TableRequest request) {
+    public ServerResponse read(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
         TicketData ticketData = data.get(_request.getKey());
         if (ticketData == null) {
-            return new TicketResponse(DatabaseResponseStatus.FAILURE, null);
+            return new TicketResponse(ResponseStatus.FAILURE, null);
         }
 		Ticket ticket = new Ticket(ticketData.getID(), ticketData.getLocationFrom(), ticketData.getLocationTo(), ticketData.getPrice());
-        return new TicketResponse(DatabaseResponseStatus.SUCCESS, ticket, ticketData.getTicketStatus());
+        return new TicketResponse(ResponseStatus.SUCCESS, ticket, ticketData.getTicketStatus());
     }
 
-    public DatabaseResponse update(TableRequest request) {
+    public ServerResponse update(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
         if (data.replace(_request.getKey(), _request.getValue()) == null)
-            return new TicketStatusResponse(DatabaseResponseStatus.FAILURE, TicketStatus.UTILIZED);
-        return new TicketStatusResponse(DatabaseResponseStatus.SUCCESS,  _request.getValue().getTicketStatus());
+            return new TicketStatusResponse(ResponseStatus.FAILURE, TicketStatus.UTILIZED);
+        return new TicketStatusResponse(ResponseStatus.SUCCESS,  _request.getValue().getTicketStatus());
     }
 
-    public DatabaseResponse create(TableRequest request) {
+    public ServerResponse create(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
         data.put(_request.getKey(), _request.getValue());
         return null;
     }
 
-    public DatabaseResponse delete(TableRequest request) {
+    public ServerResponse delete(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
         data.remove(_request.getKey());
         return null;

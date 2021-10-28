@@ -2,10 +2,10 @@ package Server.DatabaseFiles.Responses;
 
 import SupportFiles.TicketStatus;
 
-public class TicketStatusResponse extends DatabaseResponse {
+public class TicketStatusResponse extends ServerResponse {
     private TicketStatus ticketStatus;
 
-    public TicketStatusResponse(DatabaseResponseStatus status, TicketStatus ticketStatus) {
+    public TicketStatusResponse(ResponseStatus status, TicketStatus ticketStatus) {
         super(status);
         this.ticketStatus = ticketStatus;
     }

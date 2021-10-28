@@ -1,15 +1,15 @@
 package Server.DatabaseModules;
 
 import Server.DatabaseFiles.*;
-import Server.DatabaseFiles.Responses.IDatabaseResponse;
+import Server.DatabaseFiles.Responses.IResponse;
 import Server.DatabaseFiles.Responses.TicketStatusResponse;
 import Server.DatabaseFiles.TableRequests.TicketTableRequest;
-import Server.DatabaseFiles.Requests.IDatabaseRequest;
+import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Requests.SetTicketStatusRequest;
 import SupportFiles.*;
 
 public class TicketStatusUpdationModule implements IDatabaseModule {
-    public IDatabaseResponse execute(IDatabaseRequest request) {
+    public IResponse execute(IServerRequest request) {
         Database db = Database.getInstance();
         SetTicketStatusRequest formalRequest = (SetTicketStatusRequest)request;
         Ticket ticket = formalRequest.getTicket();
