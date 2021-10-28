@@ -5,6 +5,7 @@ import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
 import Server.DatabaseFiles.Responses.IDatabaseResponse;
 import Server.DatabaseFiles.Responses.TicketResponse;
 import Server.DatabaseFiles.Responses.TicketStatusResponse;
+import Server.DatabaseFiles.TableRequests.TicketTableRequest;
 import SupportFiles.TicketStatus;
 import Server.DatabaseFiles.Requests.GetTicketStatusRequest;
 import Server.DatabaseFiles.Requests.IDatabaseRequest;

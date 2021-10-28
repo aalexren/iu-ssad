@@ -1,13 +1,16 @@
- package Server.DatabaseFiles;
+ package Server.DatabaseFiles.Tables;
 
 import java.util.HashMap;
 
+import Server.DatabaseFiles.TicketData;
 import Server.DatabaseFiles.Responses.DatabaseResponse;
 import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
 import SupportFiles.Ticket;
 import SupportFiles.TicketStatus;
 import Server.DatabaseFiles.Responses.TicketResponse;
 import Server.DatabaseFiles.Responses.TicketStatusResponse;
+import Server.DatabaseFiles.TableRequests.TableRequest;
+import Server.DatabaseFiles.TableRequests.TicketTableRequest;
 
 public class TicketTable implements DataTable {
     private HashMap<Long, TicketData> data;

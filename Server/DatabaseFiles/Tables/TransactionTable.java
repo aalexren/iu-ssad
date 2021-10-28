@@ -1,8 +1,10 @@
- package Server.DatabaseFiles;
+package Server.DatabaseFiles.Tables;
 
 import java.util.HashMap;
 
 import Server.DatabaseFiles.Responses.DatabaseResponse;
+import Server.DatabaseFiles.TableRequests.TableRequest;
+import Server.DatabaseFiles.TableRequests.TransactionTableRequest;
 
 public class TransactionTable implements DataTable{
     private HashMap<Long, Boolean> data;
@@ -35,3 +37,4 @@ public class TransactionTable implements DataTable{
         return null;
     }
 }
+	

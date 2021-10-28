@@ -1,4 +1,7 @@
-package Server.DatabaseFiles;
+package Server.DatabaseFiles.TableRequests;
+
+import Server.DatabaseFiles.Tables.DatabaseTables;
+import Server.DatabaseFiles.TicketData;
 
 public class TicketTableRequest extends TableRequest {
 

@@ -1,6 +1,7 @@
-package Server.DatabaseFiles;
+package Server.DatabaseFiles.Tables;
 
 import Server.DatabaseFiles.Responses.*;
+import Server.DatabaseFiles.TableRequests.TableRequest;
 
 public interface DataTable {
 

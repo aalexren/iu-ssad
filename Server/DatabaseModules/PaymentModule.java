@@ -5,6 +5,8 @@ import java.util.UUID;
 import Server.DatabaseFiles.*;
 import Server.DatabaseFiles.Requests.BuyTicketRequest;
 import Server.DatabaseFiles.Responses.TicketResponse;
+import Server.DatabaseFiles.TableRequests.TicketTableRequest;
+import Server.DatabaseFiles.TableRequests.TransactionTableRequest;
 import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
 import Server.DatabaseFiles.Responses.IDatabaseResponse;
 import Server.DatabaseFiles.Requests.IDatabaseRequest;

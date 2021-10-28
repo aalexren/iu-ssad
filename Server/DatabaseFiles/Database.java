@@ -1,7 +1,10 @@
 package Server.DatabaseFiles;
 
 import Server.DatabaseFiles.Responses.*;
+import Server.DatabaseFiles.TableRequests.*;
 import Server.DatabaseFiles.Requests.IDatabaseRequest;
+import Server.DatabaseFiles.Tables.*;
+import Server.DatabaseFiles.*;
 
 /*
 * Singleton class
@@ -12,8 +15,7 @@ public class Database implements IDatabase {
     private DataTable ticketTable = new TicketTable();
     private DataTable transactionTable = new TransactionTable();
 
-    private Database() {
-    }
+    private Database() { }
 
     public static Database getInstance() {
         if (instance == null) {

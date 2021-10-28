@@ -3,6 +3,7 @@ package Server.DatabaseModules;
 import Server.DatabaseFiles.*;
 import Server.DatabaseFiles.Responses.IDatabaseResponse;
 import Server.DatabaseFiles.Responses.TicketStatusResponse;
+import Server.DatabaseFiles.TableRequests.TicketTableRequest;
 import Server.DatabaseFiles.Requests.IDatabaseRequest;
 import Server.DatabaseFiles.Requests.SetTicketStatusRequest;
 import SupportFiles.*;

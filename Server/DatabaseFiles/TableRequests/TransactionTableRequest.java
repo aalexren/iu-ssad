@@ -1,4 +1,6 @@
-package Server.DatabaseFiles;
+package Server.DatabaseFiles.TableRequests;
+
+import Server.DatabaseFiles.Tables.DatabaseTables;
 
 public class TransactionTableRequest extends TableRequest {
 
