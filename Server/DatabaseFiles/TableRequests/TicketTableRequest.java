@@ -3,6 +3,9 @@ package Server.DatabaseFiles.TableRequests;
 import Server.DatabaseFiles.Tables.DatabaseTables;
 import Server.DatabaseFiles.TicketData;
 
+/*
+ * Request to Ticket Table in Database
+ */
 public class TicketTableRequest extends TableRequest {
 
     private TicketData value = null;

@@ -4,6 +4,9 @@ import Client.Modules.*;
 import Server.DatabaseFiles.Requests.NotificationRequest;
 import SupportFiles.NotifierType;
 
+/*
+ * Email decorator for Notifier.
+ */
 public class EmailDecorator extends BaseDecorator {
 
     public EmailDecorator(Notifier notifier) {

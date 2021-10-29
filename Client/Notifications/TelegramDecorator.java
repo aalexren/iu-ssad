@@ -4,6 +4,9 @@ import Client.Modules.*;
 import Server.DatabaseFiles.Requests.NotificationRequest;
 import SupportFiles.NotifierType;
 
+/*
+ * Telegram decorator for Notifier.
+ */
 public class TelegramDecorator extends BaseDecorator{
 
     public TelegramDecorator(Notifier notifier) {

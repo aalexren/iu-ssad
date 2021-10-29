@@ -1,7 +1,5 @@
  package Server.DatabaseFiles.Tables;
 
-import java.util.HashMap;
-
 import Server.DatabaseFiles.TicketData;
 import Server.DatabaseFiles.Responses.ServerResponse;
 import Server.DatabaseFiles.Responses.ResponseStatus;
@@ -12,16 +10,19 @@ import Server.DatabaseFiles.Responses.TicketStatusResponse;
 import Server.DatabaseFiles.TableRequests.TableRequest;
 import Server.DatabaseFiles.TableRequests.TicketTableRequest;
 
+/*
+ * Table for saving Ticket information
+ */
 public class TicketTable implements DataTable {
-    private HashMap<Long, TicketData> data;
+    private Table<Long, TicketData> table;
 
     public TicketTable() {
-        data = new HashMap<>();
+        table = new Table<>();
     }
 
     public ServerResponse read(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
-        TicketData ticketData = data.get(_request.getKey());
+        TicketData ticketData = table.read(_request.getKey());
         if (ticketData == null) {
             return new TicketResponse(ResponseStatus.FAILURE, null);
         }
@@ -31,20 +32,20 @@ public class TicketTable implements DataTable {
 
     public ServerResponse update(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
-        if (data.replace(_request.getKey(), _request.getValue()) == null)
+        if (table.update(_request.getKey(), _request.getValue()) == null)
             return new TicketStatusResponse(ResponseStatus.FAILURE, TicketStatus.UTILIZED);
         return new TicketStatusResponse(ResponseStatus.SUCCESS,  _request.getValue().getTicketStatus());
     }
 
     public ServerResponse create(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
-        data.put(_request.getKey(), _request.getValue());
+        table.create(_request.getKey(), _request.getValue());
         return null;
     }
 
     public ServerResponse delete(TableRequest request) {
         TicketTableRequest _request = (TicketTableRequest)request;
-        data.remove(_request.getKey());
+        table.delete(_request.getKey());
         return null;
     }
 }

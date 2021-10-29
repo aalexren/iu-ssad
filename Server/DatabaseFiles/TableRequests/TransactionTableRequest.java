@@ -2,6 +2,9 @@ package Server.DatabaseFiles.TableRequests;
 
 import Server.DatabaseFiles.Tables.DatabaseTables;
 
+/*
+ * Request to Transaction Table in Database
+ */
 public class TransactionTableRequest extends TableRequest {
 
     private Boolean value = null;

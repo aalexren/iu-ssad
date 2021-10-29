@@ -2,14 +2,17 @@ package Client.Notifications;
 
 import Client.Modules.*;
 
+/*
+ * This base decorator for notifier.
+ */
 class BaseDecorator extends Notifier {
-    private Notifier wrappee;
+    private Notifier wrapper;
 
     public BaseDecorator(Notifier notifier) {
-        wrappee = notifier;
+        wrapper = notifier;
     }
 
     public void send(TransferModule transferModule) {
-        wrappee.send(transferModule);
+        wrapper.send(transferModule);
     }
 }

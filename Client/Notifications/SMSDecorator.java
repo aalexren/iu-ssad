@@ -4,6 +4,9 @@ import Client.Modules.*;
 import Server.DatabaseFiles.Requests.NotificationRequest;
 import SupportFiles.NotifierType;
 
+/*
+ * SMS decorator for Notifier.
+ */
 public class SMSDecorator extends BaseDecorator{
 
     public SMSDecorator(Notifier notifier) {

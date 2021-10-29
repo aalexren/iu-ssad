@@ -4,6 +4,10 @@ import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Requests.NotificationRequest;
 import Server.DatabaseFiles.Responses.*;
 
+
+/*
+ * Server module for handling notification requests
+ */
 public class NotifierModule implements IServerModule {
 
 	@Override

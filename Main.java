@@ -15,7 +15,7 @@ public class Main {
         Client client = new Client(firewall);
 
         // Set notification types | SMS - on, Email - off, Telegram - on
-        // Now a notification will be received for the selected type 
+        // Now a notification will be received for the selected type
         client.setNotifications(true, false, true);
 
         // Physical device wich manages communication between open/close gateates and
@@ -102,6 +102,11 @@ public class Main {
         System.out.println("Test #5 --> DENIED");
         client.makeGateRequest(client.chooseTicket(Kazan, Moscow), SamaraOutGate);
         System.out.println();
+
+
+        // Set notification types | SMS - off, Email - on, Telegram - off
+        // Now a notification will be received for the selected type
+        client.setNotifications(false, true, false);
 
         /* Test #6 */
         /*

@@ -1,40 +1,40 @@
 package Server.DatabaseFiles.Tables;
 
-import java.util.HashMap;
-
 import Server.DatabaseFiles.Responses.ServerResponse;
 import Server.DatabaseFiles.TableRequests.TableRequest;
 import Server.DatabaseFiles.TableRequests.TransactionTableRequest;
 
-public class TransactionTable implements DataTable{
-    private HashMap<Long, Boolean> data;
+/*
+ * Table for saving Transaction information
+ */
+public class TransactionTable implements DataTable {
+    private Table<Long, Boolean> table;
 
     public TransactionTable() {
-        data = new HashMap<>();
+        table = new Table<>();
     }
 
     public ServerResponse read(TableRequest request) {
-        TransactionTableRequest _request = (TransactionTableRequest)request;
-        data.get(_request.getKey());
+        TransactionTableRequest _request = (TransactionTableRequest) request;
+        table.read(_request.getKey());
         return null;
     }
 
     public ServerResponse update(TableRequest request) {
-        TransactionTableRequest _request = (TransactionTableRequest)request;
-        data.replace(_request.getKey(), _request.getValue());
+        TransactionTableRequest _request = (TransactionTableRequest) request;
+        table.update(_request.getKey(), _request.getValue());
         return null;
     }
 
     public ServerResponse create(TableRequest request) {
-        TransactionTableRequest _request = (TransactionTableRequest)request;
-        data.put(_request.getKey(), _request.getValue());
+        TransactionTableRequest _request = (TransactionTableRequest) request;
+        table.create(_request.getKey(), _request.getValue());
         return null;
     }
 
     public ServerResponse delete(TableRequest request) {
-        TransactionTableRequest _request = (TransactionTableRequest)request;
-        data.remove(_request.getKey());
+        TransactionTableRequest _request = (TransactionTableRequest) request;
+        table.delete(_request.getKey());
         return null;
     }
 }
-	
