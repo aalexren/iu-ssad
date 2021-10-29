@@ -1,9 +1,9 @@
 package Server.DatabaseFiles.Requests;
 
-public class DatabaseRequest implements IDatabaseRequest {
+public class ServerRequest implements IServerRequest {
     private String header;
 
-    public DatabaseRequest(String header) {
+    public ServerRequest(String header) {
         this.header = header;
     }
 

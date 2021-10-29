@@ -1,6 +1,6 @@
 package Client.Modules;
 
-import Server.DatabaseFiles.Requests.DatabaseRequest;
+import Server.DatabaseFiles.Requests.ServerRequest;
 import Server.DatabaseFiles.Requests.GetTicketRequest;
 import SupportFiles.Ticket;
 import Server.DatabaseFiles.Responses.TicketResponse;
@@ -16,7 +16,7 @@ public class UpdaterModule {
     }
 
     public Ticket getTicket(Ticket ticket) {
-        DatabaseRequest request = new GetTicketRequest(ticket);
+        ServerRequest request = new GetTicketRequest(ticket);
         TicketResponse response = (TicketResponse)transferModule.sendRequest(request);
         return response.getTicket();
     }

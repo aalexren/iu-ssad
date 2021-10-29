@@ -1,9 +1,10 @@
 package Server.DatabaseFiles;
 
 import Server.DatabaseFiles.Responses.*;
-import Server.DatabaseFiles.Requests.IDatabaseRequest;
-import SupportFiles.*;
-import java.util.HashMap;
+import Server.DatabaseFiles.TableRequests.*;
+import Server.DatabaseFiles.Requests.IServerRequest;
+import Server.DatabaseFiles.Tables.*;
+import Server.DatabaseFiles.*;
 
 /*
 * Singleton class
@@ -11,10 +12,10 @@ import java.util.HashMap;
 public class Database implements IDatabase {
     private volatile static Database instance;
 
-    private HashMap <Long, TicketData> ticketData   = new HashMap <Long, TicketData>() ;
-    private HashMap <Long, Boolean> transactionData = new HashMap <Long, Boolean>() ;
+    private DataTable ticketTable = new TicketTable();
+    private DataTable transactionTable = new TransactionTable();
 
-    private Database() { } 
+    private Database() { }
 
     public static Database getInstance() {
         if (instance == null) {
@@ -26,58 +27,58 @@ public class Database implements IDatabase {
         return instance;
     }
 
-	@Override
-	public IDatabaseResponse execute(IDatabaseRequest request) {
+    @Override
+    public IResponse execute(IServerRequest request) {
 
-		return null;
-	}
-
-    // MARK: - Ticket Methods
-
-    public TicketStatusResponse setTicketStatus(long ID, TicketStatus status) {
-        TicketData tempTicket = getTicket(ID);  
-        tempTicket.status = status;
-        ticketData.replace(Long.valueOf(ID), tempTicket);
-
-        return new TicketStatusResponse(DatabaseResponseStatus.SUCCESS, status);
-    } 
-
-    public TicketStatusResponse getTicketStatusResponse(long ID) {
-        TicketStatus ticketStatus = getTicket(ID).status;
-
-        return new TicketStatusResponse(DatabaseResponseStatus.SUCCESS, ticketStatus);
+        return null;
     }
 
-    public TicketStatus getTicketStatus(long ID) {
-        return ticketData.get(Long.valueOf(ID)).status;
-    }
-
-	public void deleteTicket(long ID) {
-        ticketData.remove(Long.valueOf(ID));
-    }
-
-    public TicketData getTicket(long ID) {
-        if (ticketData.get(Long.valueOf(ID)) == null)
-            return null;
-
-        return ticketData.get(Long.valueOf(ID));
-    }
-
-    public void addTicket(long id, TicketData ticket) {
-        ticketData.put(id, ticket);
-    }
-
-    // Transaction Methods
-
-    public void setTransaction(long id, Boolean status) {
-        if (transactionData.get(Long.valueOf(id)) == null) {
-            transactionData.put(id, status);
-        } else {
-            transactionData.replace(Long.valueOf(id), status);
+    public ServerResponse create(TableRequest request) {
+        switch (request.getTableType()) {
+        case TicketTable:
+            return ticketTable.create(request);
+        case TransactionTable:
+            return transactionTable.create(request);
+        default:
+            System.out.println("Something went wrong in Database");
+            return new ServerResponse(ResponseStatus.FAILURE);
         }
     }
 
-    public boolean getTransaction(long id) {
-        return transactionData.get(Long.valueOf(id));
+    public ServerResponse read(TableRequest request) {
+        switch (request.getTableType()) {
+        case TicketTable:
+            return ticketTable.read(request);
+        case TransactionTable:
+            return transactionTable.read(request);
+        default:
+            System.out.println("Something went wrong in Database");
+            return new ServerResponse(ResponseStatus.FAILURE);
+        }
     }
+
+    public ServerResponse update(TableRequest request) {
+        switch (request.getTableType()) {
+        case TicketTable:
+            return ticketTable.update(request);
+        case TransactionTable:
+            return transactionTable.update(request);
+        default:
+            System.out.println("Something went wrong in Database");
+            return new ServerResponse(ResponseStatus.FAILURE);
+        }
+    }
+
+    public ServerResponse delete(TableRequest request) {
+        switch (request.getTableType()) {
+        case TicketTable:
+            return ticketTable.delete(request);
+        case TransactionTable:
+            return transactionTable.delete(request);
+        default:
+            System.out.println("Something went wrong in Database");
+            return new ServerResponse(ResponseStatus.FAILURE);
+        }
+    }
+
 }

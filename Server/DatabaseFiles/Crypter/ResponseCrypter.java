@@ -1,26 +1,26 @@
 package Server.DatabaseFiles.Crypter;
 
-import Server.DatabaseFiles.Responses.DatabaseResponseStatus;
-import Server.DatabaseFiles.Responses.IDatabaseResponse;
+import Server.DatabaseFiles.Responses.ResponseStatus;
+import Server.DatabaseFiles.Responses.IResponse;
 
 /*
  * Used for encrypting and decrypting objects that implement IDatabaseResponse
  */
-public class ResponseCrypter implements IDatabaseResponse {
-    private IDatabaseResponse databaseResponse;
+public class ResponseCrypter implements IResponse {
+    private IResponse databaseResponse;
     private boolean encrypted;
 
     @Override
-    public DatabaseResponseStatus getStatus() {
+    public ResponseStatus getStatus() {
         return databaseResponse.getStatus();
     }
 
-    public ResponseCrypter(IDatabaseResponse databaseResponse) {
+    public ResponseCrypter(IResponse databaseResponse) {
         this.databaseResponse = databaseResponse;
-        encrypted = true;
+        this.encrypted = true;
     }
 
-    public IDatabaseResponse decrypt() {
+    public IResponse decrypt() {
         encrypted = false;
         return databaseResponse;
     }

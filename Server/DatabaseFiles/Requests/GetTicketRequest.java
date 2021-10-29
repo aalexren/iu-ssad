@@ -2,7 +2,7 @@ package Server.DatabaseFiles.Requests;
 
 import SupportFiles.Ticket;
 
-public class GetTicketRequest extends DatabaseRequest {
+public class GetTicketRequest extends ServerRequest {
 
     private Ticket ticket;
 

@@ -4,7 +4,7 @@ import SupportFiles.PaymentMethods;
 
 import SupportFiles.Location;
 
-public class BuyTicketRequest extends DatabaseRequest {
+public class BuyTicketRequest extends ServerRequest {
 
     private PaymentMethods paymentMethod;
     private Location from;

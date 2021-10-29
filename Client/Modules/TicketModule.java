@@ -5,7 +5,7 @@ import SupportFiles.Ticket;
 import java.util.UUID;
 
 import Server.DatabaseFiles.Requests.BuyTicketRequest;
-import Server.DatabaseFiles.Requests.DatabaseRequest;
+import Server.DatabaseFiles.Requests.ServerRequest;
 import Server.DatabaseFiles.Responses.TicketResponse;
 import SupportFiles.Location;
 import SupportFiles.PaymentMethods;
@@ -19,7 +19,7 @@ public class TicketModule {
     }
 
     public Ticket sendBuyTicketRequest(PaymentMethods paymentMethod, Location from, Location to) {
-        DatabaseRequest buyTicketRequest = new BuyTicketRequest(paymentMethod, from, to, generateTrasnsactionID());
+        ServerRequest buyTicketRequest = new BuyTicketRequest(paymentMethod, from, to, generateTrasnsactionID());
         TicketResponse ticketResponse = (TicketResponse)transferModule.sendRequest(buyTicketRequest);
         Ticket ticket = ticketResponse.getTicket();
 
