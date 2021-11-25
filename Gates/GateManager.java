@@ -1,8 +1,8 @@
 package Gates;
 
 import Server.DatabaseFiles.IDatabase;
-import Server.DatabaseFiles.Crypter.RequestCipher;
-import Server.DatabaseFiles.Crypter.ResponseCipher;
+import Server.DatabaseFiles.Cipher.RequestCipher;
+import Server.DatabaseFiles.Cipher.ResponseCipher;
 import Server.DatabaseFiles.Requests.*;
 import Server.DatabaseFiles.Responses.*;
 import SupportFiles.Ticket;
@@ -37,11 +37,12 @@ public class GateManager implements IGateManager {
     @Override
     public TicketStatus getTicketStatus(Ticket ticket) {
         ServerRequest request = new GetTicketStatusRequest(ticket);
-        TicketStatusResponse response = (TicketStatusResponse) sendRequest(request);
+        IResponse response = sendRequest(request);
 
         if (response.getStatus() == ResponseStatus.SUCCESS)
-            return response.getTicketStatus();
+            return ((TicketStatusResponse) response).getTicketStatus();
 
+        // Server or middleware error
         return TicketStatus.UTILIZED;
     }
 

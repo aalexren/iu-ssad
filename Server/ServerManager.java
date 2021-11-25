@@ -1,8 +1,8 @@
 package Server;
 
 import Server.DatabaseFiles.*;
-import Server.DatabaseFiles.Crypter.RequestCipher;
-import Server.DatabaseFiles.Crypter.ResponseCipher;
+import Server.DatabaseFiles.Cipher.RequestCipher;
+import Server.DatabaseFiles.Cipher.ResponseCipher;
 import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseModules.*;
 import Server.ServerModules.IServerModule;
@@ -42,7 +42,6 @@ public class ServerManager implements IDatabase {
 
         switch (request.getHeader()) {
         case "BuyTicket":
-            // database.readModule.get("Ticket table", info);
             response = paymentModule.execute(request);
             break;
         case "GetTicketStatus":

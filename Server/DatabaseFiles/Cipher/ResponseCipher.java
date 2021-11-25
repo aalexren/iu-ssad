@@ -1,4 +1,4 @@
-package Server.DatabaseFiles.Crypter;
+package Server.DatabaseFiles.Cipher;
 
 import Server.DatabaseFiles.Responses.ResponseStatus;
 import Server.DatabaseFiles.Responses.IResponse;

@@ -1,10 +1,10 @@
 package Client.Modules;
 
 import Server.DatabaseFiles.IDatabase;
-import Server.DatabaseFiles.Crypter.RequestCipher;
+import Server.DatabaseFiles.Cipher.RequestCipher;
+import Server.DatabaseFiles.Cipher.ResponseCipher;
 import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Responses.IResponse;
-import Server.DatabaseFiles.Crypter.ResponseCipher;
 
 /*
 * This module is used to take requests from other modules, encrypt them,

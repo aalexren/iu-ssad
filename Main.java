@@ -1,5 +1,6 @@
 import Client.*;
 import Gates.*;
+import Middleware.Firewall;
 import Server.*;
 import SupportFiles.*;
 
@@ -133,7 +134,7 @@ public class Main {
         client.makeGateRequest(client.chooseTicket(Moscow, Innopolis), MoscowInGate);
         System.out.println();
 
-        /* Test #9 */
+        /* Test #8 */
         /*
          * Situation: We have bought 2 tickets with different "from" locations, but same
          * "to" location (imagine that you bought a ticket for yourself and another
@@ -142,14 +143,14 @@ public class Main {
         /*
          * Result: Both gates should open, correct in gates --> ACCEPTED ACCEPTED
          */
-        System.out.println("Test #9 --> ACCEPTED, ACCEPTED");
+        System.out.println("Test #8 --> ACCEPTED, ACCEPTED");
         client.buyTicket(Samara, Innopolis, PaymentMethods.GOOGLE_PAY);
         client.buyTicket(Kazan, Innopolis, PaymentMethods.PAYPAL);
         client.makeGateRequest(client.chooseTicket(Samara, Innopolis), SamaraInGate);
         client.makeGateRequest(client.chooseTicket(Kazan, Innopolis), KazanInGate);
         System.out.println();
 
-        /* Test #10 */
+        /* Test #9 */
         /*
          * Situation: We have bought 2 tickets with different "from" locations, and try
          * exit transports with corresponding correct locations
@@ -157,7 +158,7 @@ public class Main {
         /*
          * Result: Both gates should open, correct out gates --> ACCEPTED ACCEPTED
          */
-        System.out.println("Test #10 --> ACCEPTED, ACCEPTED");
+        System.out.println("Test #9 --> ACCEPTED, ACCEPTED");
         client.makeGateRequest(client.chooseTicket(Samara, Innopolis), InnopolisOutGate);
         client.makeGateRequest(client.chooseTicket(Kazan, Innopolis), InnopolisOutGate);
         System.out.println();
