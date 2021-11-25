@@ -1,21 +1,22 @@
-package Server.DatabaseFiles.Crypter;
+package Server.DatabaseFiles.Cipher;
 
 import Server.DatabaseFiles.Requests.IServerRequest;
 
-/* 
+/*
 * Used for encrypting and decrypting objects that implement IDatabaseRequest
 */
-public class RequestCrypter implements IServerRequest {
+public class RequestCipher implements IServerRequest {
     private IServerRequest databaseRequest;
     private boolean encrypted;
 
-    public RequestCrypter(IServerRequest databaseRequest) {
+    public RequestCipher(IServerRequest databaseRequest) {
         this.databaseRequest = databaseRequest;
-        encrypted = true;
+        this.encrypted = true;
     }
 
     public IServerRequest decrypt() {
-        encrypted = false;
+        this.encrypted = false;
+
         return databaseRequest;
     }
 

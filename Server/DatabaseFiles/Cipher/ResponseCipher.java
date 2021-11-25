@@ -1,4 +1,4 @@
-package Server.DatabaseFiles.Crypter;
+package Server.DatabaseFiles.Cipher;
 
 import Server.DatabaseFiles.Responses.ResponseStatus;
 import Server.DatabaseFiles.Responses.IResponse;
@@ -6,7 +6,7 @@ import Server.DatabaseFiles.Responses.IResponse;
 /*
  * Used for encrypting and decrypting objects that implement IDatabaseResponse
  */
-public class ResponseCrypter implements IResponse {
+public class ResponseCipher implements IResponse {
     private IResponse databaseResponse;
     private boolean encrypted;
 
@@ -15,13 +15,14 @@ public class ResponseCrypter implements IResponse {
         return databaseResponse.getStatus();
     }
 
-    public ResponseCrypter(IResponse databaseResponse) {
+    public ResponseCipher(IResponse databaseResponse) {
         this.databaseResponse = databaseResponse;
         this.encrypted = true;
     }
 
     public IResponse decrypt() {
-        encrypted = false;
+        this.encrypted = false;
+
         return databaseResponse;
     }
 }

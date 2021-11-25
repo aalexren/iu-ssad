@@ -16,7 +16,11 @@ public class RFIDModule {
     private final UUID id; // Unique hash to identify the RFID
 
     public RFIDModule() {
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return this.id;
     }
 
     public GateResponse sendRequest(Ticket ticket, IGate gate) {

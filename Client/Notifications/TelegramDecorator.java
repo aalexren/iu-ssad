@@ -15,7 +15,7 @@ public class TelegramDecorator extends BaseDecorator{
 
     public void send(TransferModule transferModule){
         transferModule.sendRequest(new NotificationRequest(NotifierType.Telegram));
-        System.out.println("\t\tTelegram notfication was sent successfully!");
+        System.out.println("\t\tTelegram notification was sent successfully!");
         super.send(transferModule);
     }
 }

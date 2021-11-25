@@ -11,7 +11,7 @@ import Client.Modules.TransferModule;
 import Client.Modules.UpdaterModule;
 import Gates.GateResponse;
 import Gates.IGate;
-import Server.Firewall;
+import Middleware.Firewall;
 import Client.Notifications.*;
 
 import java.util.ArrayList;

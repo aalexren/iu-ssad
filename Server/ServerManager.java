@@ -1,8 +1,8 @@
 package Server;
 
 import Server.DatabaseFiles.*;
-import Server.DatabaseFiles.Crypter.RequestCrypter;
-import Server.DatabaseFiles.Crypter.ResponseCrypter;
+import Server.DatabaseFiles.Cipher.RequestCipher;
+import Server.DatabaseFiles.Cipher.ResponseCipher;
 import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseModules.*;
 import Server.ServerModules.IServerModule;
@@ -14,42 +14,41 @@ import Server.DatabaseFiles.Requests.IServerRequest;
 public class ServerManager implements IDatabase {
     private IDatabaseModule paymentModule;
     private IDatabaseModule ticketStatusCheckingModule;
-    private IDatabaseModule ticketStatusUpdationModule;
+    private IDatabaseModule ticketStatusUpdatingModule;
     private IDatabaseModule ticketExtractionModule;
     private IServerModule notificationModule;
 
     public ServerManager(IDatabaseModule paymentModule, IDatabaseModule ticketStatusCheckingModule,
-            IDatabaseModule ticketStatusUpdationModule, IDatabaseModule ticketExtractionModule,
+            IDatabaseModule ticketStatusUpdatingModule, IDatabaseModule ticketExtractionModule,
             IServerModule notificationModule) {
         this.paymentModule = paymentModule;
         this.ticketStatusCheckingModule = ticketStatusCheckingModule;
-        this.ticketStatusUpdationModule = ticketStatusUpdationModule;
-        this.ticketExtractionModule = ticketStatusUpdationModule;
+        this.ticketStatusUpdatingModule = ticketStatusUpdatingModule;
+        this.ticketExtractionModule = ticketStatusUpdatingModule;
         this.notificationModule = notificationModule;
     }
 
     public ServerManager() {
         paymentModule = new PaymentModule();
         ticketStatusCheckingModule = new TicketStatusCheckingModule();
-        ticketStatusUpdationModule = new TicketStatusUpdationModule();
+        ticketStatusUpdatingModule = new TicketStatusUpdatingModule();
         ticketExtractionModule = new TicketExtractionModule();
     }
 
     @Override
     public IResponse execute(IServerRequest request) {
         IResponse response;
-        request = ((RequestCrypter)request).decrypt();
+        request = ((RequestCipher)request).decrypt();
 
         switch (request.getHeader()) {
         case "BuyTicket":
-            // database.readModule.get("Ticket table", info);
             response = paymentModule.execute(request);
             break;
         case "GetTicketStatus":
             response = ticketStatusCheckingModule.execute(request);
             break;
         case "SetTicketStatus":
-            response = ticketStatusUpdationModule.execute(request);
+            response = ticketStatusUpdatingModule.execute(request);
             break;
         case "GetTicket":
             response = ticketExtractionModule.execute(request);
@@ -62,6 +61,6 @@ public class ServerManager implements IDatabase {
             response = new ServerResponse(ResponseStatus.FAILURE);
         }
 
-        return new ResponseCrypter(response);
+        return new ResponseCipher(response);
     }
 }
