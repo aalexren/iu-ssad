@@ -4,7 +4,6 @@ import Server.DatabaseFiles.Responses.*;
 import Server.DatabaseFiles.TableRequests.*;
 import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Tables.*;
-import Server.DatabaseFiles.*;
 
 /*
 * Singleton class

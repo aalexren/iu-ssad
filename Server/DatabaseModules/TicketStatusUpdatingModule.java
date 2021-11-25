@@ -8,7 +8,7 @@ import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Requests.SetTicketStatusRequest;
 import SupportFiles.*;
 
-public class TicketStatusUpdationModule implements IDatabaseModule {
+public class TicketStatusUpdatingModule implements IDatabaseModule {
     public IResponse execute(IServerRequest request) {
         Database db = Database.getInstance();
         SetTicketStatusRequest formalRequest = (SetTicketStatusRequest)request;

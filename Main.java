@@ -11,14 +11,14 @@ public class Main {
         // Firewall which will be used to accumulate client requests
         Firewall firewall = new Firewall();
 
-        // User device clent
+        // User device client
         Client client = new Client(firewall);
 
         // Set notification types | SMS - on, Email - off, Telegram - on
         // Now a notification will be received for the selected type
         client.setNotifications(true, false, true);
 
-        // Physical device wich manages communication between open/close gateates and
+        // Physical device which manages communication between open/close gates and
         // server
         GateManager gateManager = new GateManager(firewall);
 
@@ -58,7 +58,7 @@ public class Main {
          * in Samara
          */
         /*
-         * Result: Gate should not open, because of wromg location destination -->
+         * Result: Gate should not open, because of wrong location destination -->
          * DENIED
          */
         System.out.println("Test #2 --> DENIED");
@@ -140,7 +140,7 @@ public class Main {
          * person). We trying to use both tickets in one time.
          */
         /*
-         * Result: Both gates should open, correct ingates --> ACCEPTED ACCEPTED
+         * Result: Both gates should open, correct in gates --> ACCEPTED ACCEPTED
          */
         System.out.println("Test #9 --> ACCEPTED, ACCEPTED");
         client.buyTicket(Samara, Innopolis, PaymentMethods.GOOGLE_PAY);
@@ -155,7 +155,7 @@ public class Main {
          * exit transports with corresponding correct locations
          */
         /*
-         * Result: Both gates should open, correct outgates --> ACCEPTED ACCEPTED
+         * Result: Both gates should open, correct out gates --> ACCEPTED ACCEPTED
          */
         System.out.println("Test #10 --> ACCEPTED, ACCEPTED");
         client.makeGateRequest(client.chooseTicket(Samara, Innopolis), InnopolisOutGate);

@@ -12,15 +12,15 @@ import Server.ServerModules.NotifierModule;
 public class Firewall implements IDatabase {
     private ServerManager serverManager;
 
-    // Firewall should ckeck if it can connect server with client
+    // Firewall should check if it can connect server with client
     private boolean checkConnection() {
-        // Some check stuf
+        // Some check stuff
         return true;
     }
 
     public Firewall() {
         this.serverManager = new ServerManager(new PaymentModule(), new TicketStatusCheckingModule(),
-                new TicketStatusUpdationModule(), new TicketExtractionModule(), new NotifierModule());
+                new TicketStatusUpdatingModule(), new TicketExtractionModule(), new NotifierModule());
     }
 
     @Override

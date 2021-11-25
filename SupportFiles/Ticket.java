@@ -48,8 +48,4 @@ public class Ticket implements ITicket {
     public TicketStatus getTicketStatus() {
         return this.status;
     }
-
-    private void recalculatePrice() {
-        // TODO somehow change the price
-    }
 }

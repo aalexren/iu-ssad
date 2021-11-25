@@ -1,10 +1,10 @@
 package Client.Modules;
 
 import Server.DatabaseFiles.IDatabase;
-import Server.DatabaseFiles.Crypter.RequestCrypter;
+import Server.DatabaseFiles.Crypter.RequestCipher;
 import Server.DatabaseFiles.Requests.IServerRequest;
 import Server.DatabaseFiles.Responses.IResponse;
-import Server.DatabaseFiles.Crypter.ResponseCrypter;
+import Server.DatabaseFiles.Crypter.ResponseCipher;
 
 /*
 * This module is used to take requests from other modules, encrypt them,
@@ -18,8 +18,8 @@ public class TransferModule {
     }
 
     public IResponse sendRequest(IServerRequest databaseRequest) {
-        RequestCrypter requestCrypter = new RequestCrypter(databaseRequest);
-        IResponse databaseResponse = fireWall.execute(requestCrypter);
-        return ((ResponseCrypter)databaseResponse).decrypt();
+        RequestCipher requestCipher = new RequestCipher(databaseRequest);
+        IResponse databaseResponse = fireWall.execute(requestCipher);
+        return ((ResponseCipher)databaseResponse).decrypt();
     }
 }
