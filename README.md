@@ -16,7 +16,7 @@ Clients have different modules for making requests to Server. You can read more 
 
 This application aims at the development and implementation of a system for ticketing. The application can be used anytime, anywhere, and tickets will be available on the customer’s phone in the form of “RFID”. GPS module is used for providing validation of the ticket at the source and deletion at the destination. For security reasons, the information about every user is stored and encrypted on CLOUD. The cloud database makes the information easily accessible anytime it is needed. The system provides multiple ways of payment methods.  
 
-![UML can be found here](uml.pdf)
+[UML can be found here](uml.pdf)
 
 ### **Design patterns, OOP, and SOLID principles (v3)**
 We corrected the mistakes of Assignment 2, refactored UML, and added new functionality.  
